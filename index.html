@@ -134,11 +134,17 @@
     .chip[aria-pressed="true"] .n { color: var(--accent); opacity: .8; }
 
     /* ---------- Tabela ---------- */
-    .tablecard { overflow: hidden; }
+    .tablecard { overflow: clip; } /* clip (e não hidden) para a barra de scroll poder ficar colada ao fundo do ecrã */
     .tablehead { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
     .tablehead .resumo { color: var(--text-2); font-size: 13px; }
     .tablehead .resumo b { color: var(--text); }
     .table-scroll { overflow: auto; max-height: calc(100vh - 140px); }
+    /* A barra horizontal nativa fica no fundo da tabela (muitas vezes fora do ecrã);
+       usa-se a barra .hbar, que fica sempre visível no fundo da janela. */
+    .table-scroll::-webkit-scrollbar:horizontal { height: 0; }
+    .hbar { position: sticky; bottom: 0; z-index: 6; overflow-x: auto; overflow-y: hidden; background: var(--surface); border-top: 1px solid var(--border); }
+    .hbar[hidden] { display: none; }
+    .hbar > div { height: 1px; }
 
     table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 1180px; }
     thead th { position: sticky; top: 0; z-index: 2; background: var(--surface-2); text-align: left; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--text-2); padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; user-select: none; }
@@ -150,6 +156,17 @@
     tbody td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tbody tr:hover td { background: var(--surface-2); }
     tbody tr:last-child td { border-bottom: 0; }
+
+    /* Em ecrãs largos, "Parado há" e "Cliente" ficam fixos à esquerda ao mover as colunas,
+       para se saber sempre a que cliente se está a escrever. */
+    @media (min-width: 900px) {
+      .table-scroll th:nth-child(-n+2):not([colspan]), .table-scroll td:nth-child(-n+2):not([colspan]) { position: sticky; background: var(--surface); }
+      .table-scroll thead th:nth-child(-n+2) { background: var(--surface-2); z-index: 4; }
+      .table-scroll tbody td:nth-child(-n+2):not([colspan]) { z-index: 1; }
+      .table-scroll tbody tr:hover td:nth-child(-n+2):not([colspan]) { background: var(--surface-2); }
+      .table-scroll th:nth-child(1), .table-scroll td:nth-child(1):not([colspan]) { left: 0; min-width: 120px; max-width: 120px; }
+      .table-scroll th:nth-child(2), .table-scroll td:nth-child(2):not([colspan]) { left: 120px; box-shadow: 1px 0 0 var(--border); }
+    }
 
     .cliente { min-width: 230px; }
     .cliente a { color: var(--text); font-weight: 600; text-decoration: none; }
@@ -352,6 +369,7 @@
           <tbody id="corpoTabela"></tbody>
         </table>
       </div>
+      <div class="hbar" id="hbar" hidden aria-hidden="true"><div id="hbarInner"></div></div>
       <div class="tablefoot">
         <div id="infoPagina"></div>
         <div class="pager">
@@ -767,10 +785,8 @@
     function escolherMaterial(id) {
       materialAtivo = id;
       paginaAtual = 1;
-      // Com um material escolhido, o que interessa é ver a maior fatura nesse material.
-      ordenacao = id
-        ? { chave: id + "_max", dir: "desc" }
-        : { chave: "dias_desde_ultimo_documento", dir: "desc" };
+      // A ordem é sempre a mesma: há mais tempo sem comprar primeiro.
+      ordenacao = { chave: "dias_desde_ultimo_documento", dir: "desc" };
       renderizarChips();
       renderizarCabecalho();
       renderizar();
@@ -853,9 +869,7 @@
 
       if (materialAtivo) {
         var nome = nomeMaterial(materialAtivo);
-        cols.push({ id: "mat_max", rotulo: "Maior fatura · " + nome, chave: materialAtivo + "_max", num: true, mat: true, dica: "Maior valor numa só fatura neste material (sem IVA)" });
-        cols.push({ id: "mat_total", rotulo: "Total · " + nome, chave: materialAtivo + "_total", num: true, mat: true, dica: "Total faturado neste material (sem IVA)" });
-        cols.push({ id: "mat_ultima", rotulo: "Última compra", chave: materialAtivo + "_ultima", mat: true });
+        cols.push({ id: "mat_ultima", rotulo: "Última compra · " + nome, chave: materialAtivo + "_ultima_valor", num: true, mat: true, dica: "Valor deste material na última fatura em que o cliente o comprou (sem IVA)" });
       }
 
       cols.push({ id: "estado_followup", rotulo: "Estado" });
@@ -923,8 +937,8 @@
     }
 
     // Valor de UM documento (o último) e, por baixo, a data desse documento.
-    function celulaUltimo(valor, valorComIva, data) {
-      var td = el("td", { class: "num cell" });
+    function celulaUltimo(valor, valorComIva, data, classeExtra) {
+      var td = el("td", { class: "num cell" + (classeExtra ? " " + classeExtra : "") });
       if (!temValor(valor)) {
         td.textContent = "—";
         td.classList.add("muted");
@@ -1005,9 +1019,7 @@
 
       if (materialAtivo) {
         var m = materialAtivo;
-        tr.appendChild(celulaMoeda(l[m + "_max"], "mat"));
-        tr.appendChild(celulaMoeda(l[m + "_total"], "mat"));
-        tr.appendChild(celula(dataPT(l[m + "_ultima"]) || "—", "mat"));
+        tr.appendChild(celulaUltimo(l[m + "_ultima_valor"], null, l[m + "_ultima"], "mat"));
       }
 
       tr.appendChild(celula(editor(l, "estado_followup")));
@@ -1050,6 +1062,7 @@
       $("infoPagina").textContent = total ? de + "–" + ate + " de " + fmtInt.format(total) : "0 resultados";
       $("btnAnterior").disabled = paginaAtual <= 1;
       $("btnSeguinte").disabled = paginaAtual >= paginas;
+      atualizarBarraH();
     }
 
     function renderizarResumo(total) {
@@ -1058,9 +1071,7 @@
       r.appendChild(el("b", { text: fmtInt.format(total) }));
       r.appendChild(document.createTextNode(total === 1 ? " cliente" : " clientes"));
       if (materialAtivo) {
-        r.appendChild(document.createTextNode(" que compraram " + nomeMaterial(materialAtivo).toLowerCase() + ", ordenados por "));
-        r.appendChild(el("b", { text: ordenacao.chave === materialAtivo + "_max" ? "maior fatura" : "a ordem escolhida" }));
-        r.appendChild(document.createTextNode(" (valores sem IVA)"));
+        r.appendChild(document.createTextNode(" que já compraram " + nomeMaterial(materialAtivo).toLowerCase() + " (valores sem IVA)"));
       }
     }
 
@@ -1211,9 +1222,35 @@
 
     var eventosLigados = false;
 
+    function atualizarBarraH() {
+      var t = document.querySelector(".table-scroll");
+      var h = $("hbar");
+      if (!t || !h) return;
+      var larga = t.scrollWidth > t.clientWidth + 1;
+      h.hidden = !larga;
+      // + largura da barra vertical, para o fim de curso das duas barras coincidir
+      $("hbarInner").style.width = (t.scrollWidth + (t.offsetWidth - t.clientWidth)) + "px";
+      h.scrollLeft = t.scrollLeft;
+    }
+
     function ligarEventos() {
       if (eventosLigados) return; // o ecrã do código pode voltar a aparecer: não duplicar eventos
       eventosLigados = true;
+
+      // Barra de scroll horizontal sempre visível: espelha o scroll da tabela.
+      var tabelaScroll = document.querySelector(".table-scroll");
+      var hbar = $("hbar");
+      var aSincronizar = false;
+      tabelaScroll.addEventListener("scroll", function () {
+        if (aSincronizar) { aSincronizar = false; return; }
+        if (hbar.scrollLeft !== tabelaScroll.scrollLeft) { aSincronizar = true; hbar.scrollLeft = tabelaScroll.scrollLeft; }
+      });
+      hbar.addEventListener("scroll", function () {
+        if (aSincronizar) { aSincronizar = false; return; }
+        if (tabelaScroll.scrollLeft !== hbar.scrollLeft) { aSincronizar = true; tabelaScroll.scrollLeft = hbar.scrollLeft; }
+      });
+      window.addEventListener("resize", atualizarBarraH);
+      if (window.ResizeObserver) new ResizeObserver(atualizarBarraH).observe(tabelaScroll.querySelector("table"));
 
       var atrasoPesquisa = null;
       $("filtroPesquisa").addEventListener("input", function () {
