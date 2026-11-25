@@ -332,8 +332,8 @@
           <option value="Fatura">Fatura</option>
           <option value="Orçamento">Orçamento</option>
         </select>
-        <label class="num"><span>Faturado ≥</span><input type="number" min="0" step="100" id="minFaturado" placeholder="€" aria-label="Valor mínimo faturado"></label>
-        <label class="num"><span>Orçamentado ≥</span><input type="number" min="0" step="100" id="minOrcamentado" placeholder="€" aria-label="Valor mínimo orçamentado"></label>
+        <label class="num"><span>Última fatura ≥</span><input type="number" min="0" step="100" id="minFaturado" placeholder="€" aria-label="Valor mínimo da última fatura"></label>
+        <label class="num"><span>Último orçamento ≥</span><input type="number" min="0" step="100" id="minOrcamentado" placeholder="€" aria-label="Valor mínimo do último orçamento"></label>
         <button class="btn ghost" id="btnLimparFiltros">Limpar</button>
       </div>
       <div class="chiprow">
@@ -795,8 +795,8 @@
         }
 
         if (tipoUltimo && l.tipo_ultimo_documento !== tipoUltimo) return false;
-        if (minFat > 0 && numero(l.valor_total_faturado) < minFat) return false;
-        if (minOrc > 0 && numero(l.valor_total_orcamentado) < minOrc) return false;
+        if (minFat > 0 && numero(l.valor_ultima_fatura) < minFat) return false;
+        if (minOrc > 0 && numero(l.valor_ultimo_orcamento) < minOrc) return false;
 
         if (comercialFiltro) {
           var c = valorEditado(l, "comercial") || "";
@@ -847,8 +847,8 @@
         { id: "parado", rotulo: "Parado há", chave: "dias_desde_ultimo_documento" },
         { id: "cliente", rotulo: "Cliente", chave: "cliente_nome" },
         { id: "ultimo", rotulo: "Último documento", chave: "data_ultimo_documento" },
-        { id: "faturado", rotulo: "Faturado", chave: "valor_total_faturado", num: true },
-        { id: "orcamentado", rotulo: "Orçamentado", chave: "valor_total_orcamentado", num: true }
+        { id: "ultima_fatura", rotulo: "Última fatura", chave: "valor_ultima_fatura", num: true, dica: "Valor da última fatura (sem IVA)" },
+        { id: "ultimo_orcamento", rotulo: "Último orçamento", chave: "valor_ultimo_orcamento", num: true, dica: "Valor do último orçamento (sem IVA)" }
       ];
 
       if (materialAtivo) {
@@ -922,6 +922,21 @@
       return td;
     }
 
+    // Valor de UM documento (o último) e, por baixo, a data desse documento.
+    function celulaUltimo(valor, valorComIva, data) {
+      var td = el("td", { class: "num cell" });
+      if (!temValor(valor)) {
+        td.textContent = "—";
+        td.classList.add("muted");
+        return td;
+      }
+      td.appendChild(document.createTextNode(fmtMoeda.format(numero(valor))));
+      td.appendChild(el("span", { class: "sub", text: dataPT(data) }));
+      td.title = "Sem IVA: " + fmtMoeda2.format(numero(valor)) +
+        (temValor(valorComIva) ? " · com IVA: " + fmtMoeda2.format(numero(valorComIva)) : "");
+      return td;
+    }
+
     function registarAlteracao(chave, linha, campo, valor) {
       if (!alteracoes[chave]) {
         alteracoes[chave] = {
@@ -985,8 +1000,8 @@
       ult.appendChild(el("span", { class: "sub", text: l.tipo_ultimo_documento || "" }));
       tr.appendChild(celula(ult));
 
-      tr.appendChild(celulaMoeda(l.valor_total_faturado));
-      tr.appendChild(celulaMoeda(l.valor_total_orcamentado));
+      tr.appendChild(celulaUltimo(l.valor_ultima_fatura, l.valor_ultima_fatura_iva, l.data_ultima_fatura));
+      tr.appendChild(celulaUltimo(l.valor_ultimo_orcamento, l.valor_ultimo_orcamento_iva, l.data_ultimo_orcamento));
 
       if (materialAtivo) {
         var m = materialAtivo;
