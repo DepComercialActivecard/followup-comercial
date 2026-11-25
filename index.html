@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Follow-up Comercial Moloni</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9E%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --azul: #2563EB;
+      --azul-escuro: #1D4ED8;
+      --fundo: #F5F7FB;
+      --texto: #0F172A;
+      --texto-suave: #64748B;
+      --borda: #D9E2EC;
+      --branco: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .app {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 1.8rem 2rem 3rem;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 1.1rem;
+    }
+
+    .hero-title .accent { color: var(--azul); }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-pill {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .btn-pill:hover { border-color: var(--azul); color: var(--azul); }
+
+    .top-bar-info {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+    }
+
+    .update-panel {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .update-panel-title { font-weight: 700; margin-bottom: 0.15rem; }
+    .update-panel-subtitle { color: var(--texto-suave); font-size: 0.85rem; margin-bottom: 0.9rem; }
+
+    .update-panel-fields {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .update-panel-fields label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      gap: 0.3rem;
+    }
+
+    .update-panel-fields input {
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.9rem;
+      width: 130px;
+    }
+
+    .btn-primary {
+      background: var(--azul);
+      color: #fff;
+      border: 1px solid var(--azul);
+      border-radius: 10px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: var(--azul-escuro); }
+
+    .btn-primary:disabled {
+      background: #E5E7EB;
+      color: #94A3B8;
+      border-color: #D1D5DB;
+      cursor: not-allowed;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: var(--texto-suave);
+      font-size: 0.82rem;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0.6rem 0.4rem;
+    }
+
+    .btn-link:hover { color: var(--azul); }
+
+    .progress-info {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+    }
+
+    .progress-bar-track {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 0.4rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--azul);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 1100px) {
+      .metrics-row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 420px) {
+      .metrics-row { grid-template-columns: 1fr; }
+    }
+
+    .metric-card {
+      background: var(--branco);
+      border: 1px solid #DCE5F0;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+    }
+
+    .metric-card.soft-orange {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF7ED 100%);
+      border-color: #FED7AA;
+    }
+
+    .metric-label { color: var(--texto-suave); font-size: 0.8rem; margin-bottom: 0.25rem; }
+    .metric-value { font-size: 1.6rem; font-weight: 800; }
+
+    .filters-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .filters-row input[type="text"],
+    .filters-row select {
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      font-size: 0.85rem;
+      background: var(--branco);
+      color: var(--texto);
+    }
+
+    .filters-row input[type="text"] { flex: 1; min-width: 200px; }
+
+    .popover-wrap { position: relative; }
+
+    .popover {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 0.6rem;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+      z-index: 20;
+      min-width: 200px;
+    }
+
+    .popover label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.2rem;
+      cursor: pointer;
+    }
+
+    .save-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+    }
+
+    .aviso {
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .aviso-sucesso { background: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; }
+    .aviso-conflito { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+    .aviso-erro { background: #FEE2E2; color: #B91C1C; border: 1px solid #FECACA; }
+
+    .table-wrap {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+    }
+
+    .table-scroll { overflow-x: auto; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+
+    thead th {
+      text-align: left;
+      background: #F3F6FC;
+      color: #334155;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0.7rem 0.75rem;
+      border-bottom: 2px solid var(--borda);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid #EEF2F7;
+      background: var(--branco);
+      vertical-align: middle;
+    }
+
+    tbody tr:nth-child(even) td { background: #FAFBFD; }
+    tbody tr:hover td { background: #EFF6FF; }
+
+    th:nth-child(1), td:nth-child(1) { width: 150px; }
+    th:nth-child(2), td:nth-child(2) { min-width: 200px; }
+    th:nth-child(3), td:nth-child(3) { width: 110px; }
+    th:nth-child(4), td:nth-child(4) { width: 130px; }
+    th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6) { width: 130px; text-align: right; }
+    th:nth-child(7), td:nth-child(7) { width: 170px; }
+    th:nth-child(8), td:nth-child(8) { width: 150px; }
+    th:nth-child(9), td:nth-child(9) { min-width: 240px; }
+    th:nth-child(10), td:nth-child(10) { width: 150px; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-muito-alta { background: #FEE2E2; color: #B91C1C; }
+    .badge-alta { background: #FFEDD5; color: #C2410C; }
+    .badge-contactar { background: #FEF3C7; color: #92400E; }
+    .badge-verificacao { background: #E0E7FF; color: #4338CA; }
+    .badge-ok { background: #DCFCE7; color: #15803D; }
+    .badge-recente { background: #E2E8F0; color: #334155; }
+    .badge-sem { background: #F1F5F9; color: #64748B; }
+
+    td input[type="text"], td input[type="date"], td select, td textarea {
+      width: 100%;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      padding: 0.3rem 0.4rem;
+      font-size: 0.82rem;
+      background: var(--branco);
+      font-family: inherit;
+    }
+
+    td textarea {
+      resize: vertical;
+      transition: all 0.15s ease;
+    }
+
+    td input.editado, td select.editado, td textarea.editado { border-color: var(--azul); background: #EFF6FF; }
+
+    .pagination-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 0.7rem 0;
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+    }
+
+    .pagination-row button {
+      background: var(--branco);
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+      color: var(--texto);
+      cursor: pointer;
+    }
+
+    .pagination-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .estado-erro { color: #B91C1C; font-weight: 600; }
+
+    .gate-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--fundo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .gate-card {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      padding: 2rem;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .gate-card .hero-title { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .gate-card p { color: var(--texto-suave); font-size: 0.85rem; margin: 0 0 1.2rem; }
+
+    .gate-card input {
+      width: 100%;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 0.65rem 0.8rem;
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.9rem;
+    }
+
+    .gate-card .btn-primary { width: 100%; padding: 0.7rem; }
+    .gate-erro { color: #B91C1C; font-size: 0.82rem; margin-top: 0.8rem; min-height: 1.2em; }
+  </style>
+</head>
+<body>
+  <div id="gateOverlay" class="gate-overlay">
+    <div class="gate-card">
+      <div class="hero-title">Follow-up <span class="accent">Comercial Moloni</span></div>
+      <p>Introduz o código de acesso para entrar.</p>
+      <input type="password" id="gateCodigo" placeholder="Código de acesso" autocomplete="off">
+      <button id="gateBotao" class="btn-primary">Entrar</button>
+      <div id="gateErro" class="gate-erro"></div>
+    </div>
+  </div>
+
+  <div class="app" id="app" style="visibility: hidden;">
+    <div class="hero-title">Follow-up <span class="accent">Comercial Moloni</span></div>
+
+    <div class="top-bar">
+      <button id="btnToggleUpdate" class="btn-pill">🔄 Atualizar dados do Moloni</button>
+      <div class="top-bar-info" id="infoUltimaAtualizacao">A carregar...</div>
+    </div>
+
+    <div id="avisoDesatualizado" class="aviso aviso-conflito" hidden></div>
+
+    <div id="painelAtualizacao" class="update-panel" hidden>
+      <div class="update-panel-title">Atualizar dados da Moloni</div>
+      <div class="update-panel-subtitle">Por defeito atualiza só o ano corrente (mais rápido — os anos anteriores não mudam). Só precisas do histórico completo raramente.</div>
+      <div class="update-panel-fields">
+        <label>Ano inicial <input type="number" id="anoInicial"></label>
+        <label>Ano final <input type="number" id="anoFinal"></label>
+        <label>Máximo por tipo/ano <input type="number" id="maxDocs" value="5000"></label>
+      </div>
+      <button id="btnExecutar" class="btn-primary">🚀 Executar atualização</button>
+      <button id="btnHistoricoCompleto" type="button" class="btn-link">🕐 Sincronizar histórico completo (desde 2019)</button>
+      <div id="progressoAtualizacao" class="progress-info" hidden>
+        <div id="progressoTexto">A iniciar...</div>
+        <div class="progress-bar-track"><div id="progressoBarra" class="progress-bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Clientes analisados</div>
+        <div class="metric-value" id="metricAnalisados">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Clientes prioritários</div>
+        <div class="metric-value" id="metricPrioritarios">0</div>
+      </div>
+      <div class="metric-card" id="cardVencidos">
+        <div class="metric-label">Follow-ups vencidos</div>
+        <div class="metric-value" id="metricVencidos">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Documentos guardados</div>
+        <div class="metric-value" id="metricDocumentos">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Prioritários sem comercial</div>
+        <div class="metric-value" id="metricSemComercial">0</div>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <input type="text" id="filtroPesquisa" placeholder="Pesquisar cliente ou NIF...">
+
+      <div class="popover-wrap">
+        <button id="btnEstados" class="btn-pill">Estados ▾</button>
+        <div id="popoverEstados" class="popover" hidden></div>
+      </div>
+
+      <select id="filtroTipoUltimo">
+        <option value="">Tipo último documento: Todos</option>
+        <option value="Fatura">Fatura</option>
+        <option value="Orçamento">Orçamento</option>
+      </select>
+
+      <select id="filtroComercial">
+        <option value="">Comercial: Todos</option>
+        <option value="__sem__">Sem comercial atribuído</option>
+      </select>
+
+      <select id="filtroSituacao">
+        <option value="todos">Situação follow-up: Todos</option>
+        <option value="sem_data">Sem próxima data</option>
+        <option value="vencidos">Vencidos</option>
+        <option value="hoje">Hoje</option>
+        <option value="proximos_7">Próximos 7 dias</option>
+        <option value="proximos_30">Próximos 30 dias</option>
+      </select>
+
+      <select id="ordenarPor">
+        <option value="dias_desde_ultimo_documento">Ordenar por: Dias desde último documento</option>
+        <option value="cliente_nome">Cliente</option>
+        <option value="valor_total_faturado">Valor total faturado</option>
+        <option value="valor_total_orcamentado">Valor total orçamentado</option>
+        <option value="proxima_data">Próxima data</option>
+      </select>
+
+      <select id="ordem">
+        <option value="desc">Descendente</option>
+        <option value="asc">Ascendente</option>
+      </select>
+    </div>
+
+    <div class="save-bar">
+      <div id="alteracoesInfo">Sem alterações por guardar</div>
+      <button id="btnGuardar" class="btn-primary" disabled>Guardar alterações</button>
+    </div>
+
+    <div id="aviso" class="aviso" hidden></div>
+
+    <div class="pagination-row" id="paginacaoTopo"></div>
+
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Estado</th>
+              <th>Cliente</th>
+              <th>NIF</th>
+              <th>Data último documento</th>
+              <th>Valor total faturado</th>
+              <th>Valor total orçamentado</th>
+              <th>Estado follow-up</th>
+              <th>Comercial</th>
+              <th>Comentário</th>
+              <th>Próxima data</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabela">
+            <tr><td colspan="10">A carregar dados...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="pagination-row" id="paginacaoFundo"></div>
+  </div>
+
+  <script>
+    // ---------- Ponte para o Apps Script via fetch (fora do script.google.com) ----------
+    // Substitui google.script.run por uma versão que fala por HTTP normal,
+    // usando exatamente a mesma "forma" de chamada, para o resto do código
+    // não precisar de mudar nada.
+
+    var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6xLpcScN0K76jZSZTWHtez87elvLAKtU5jO5jEy4NejOGI74c4fKdIHDpngwLB2KU/exec";
+
+    var FUNCOES_REMOTAS = [
+      "obterDadosIniciais", "guardarAlteracoesFollowup",
+      "iniciarAtualizacao", "estadoAtualizacao", "verificarCodigoAcesso"
+    ];
+
+    var google = {
+      script: {
+        get run() {
+          var aoTerSucesso = null;
+          var aoFalhar = null;
+
+          var runner = {
+            withSuccessHandler: function (fn) { aoTerSucesso = fn; return runner; },
+            withFailureHandler: function (fn) { aoFalhar = fn; return runner; }
+          };
+
+          FUNCOES_REMOTAS.forEach(function (nomeFuncao) {
+            runner[nomeFuncao] = function () {
+              var params = Array.prototype.slice.call(arguments);
+
+              fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: nomeFuncao, params: params })
+              })
+                .then(function (resposta) { return resposta.json(); })
+                .then(function (corpo) {
+                  if (corpo.ok) {
+                    if (aoTerSucesso) aoTerSucesso(corpo.resultado);
+                  } else {
+                    if (aoFalhar) aoFalhar({ message: corpo.erro || "Erro desconhecido." });
+                  }
+                })
+                .catch(function (erro) {
+                  if (aoFalhar) aoFalhar({ message: String(erro) });
+                });
+            };
+          });
+
+          return runner;
+        }
+      }
+    };
+
+    // ---------- A partir daqui é o mesmo código da versão Apps Script ----------
+
+    var ESTADOS_FOLLOWUP = [
+      "", "Por contactar", "Contactado", "Sem resposta", "Interessado",
+      "Enviar proposta", "A aguardar resposta", "Recuperado", "Não contactar"
+    ];
+
+    var COMERCIAIS = ["", "Alexandre Brito", "Bruno Maria", "Miguel Neves"];
+
+    var TODOS_ESTADOS = [
+      "Prioridade muito alta", "Prioridade alta", "Contactar",
+      "Verificação", "OK", "Recente", "Sem documentos"
+    ];
+
+    var ESTADOS_SELECIONADOS_DEFEITO = [
+      "Prioridade muito alta", "Prioridade alta", "Contactar", "Verificação"
+    ];
+
+    var BADGE_CLASSE = {
+      "Prioridade muito alta": "badge-muito-alta",
+      "Prioridade alta": "badge-alta",
+      "Contactar": "badge-contactar",
+      "Verificação": "badge-verificacao",
+      "OK": "badge-ok",
+      "Recente": "badge-recente",
+      "Sem documentos": "badge-sem"
+    };
+
+    var LINHAS_POR_PAGINA = 50;
+
+    var resumoCompleto = [];
+    var alteracoes = {};
+    var paginaAtual = 1;
+    var estadosSelecionados = new Set(ESTADOS_SELECIONADOS_DEFEITO);
+    var atualizacaoEmCurso = false;
+    var pollTimer = null;
+
+    // ---------- Código de acesso ----------
+
+    var CODIGO_ACESSO_STORAGE_KEY = "moloni_followup_codigo";
+    var codigoAcesso = "";
+
+    function lerCodigoGuardado() {
+      try {
+        return localStorage.getItem(CODIGO_ACESSO_STORAGE_KEY) || "";
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function guardarCodigo(codigo) {
+      try {
+        localStorage.setItem(CODIGO_ACESSO_STORAGE_KEY, codigo);
+      } catch (e) {
+        // Sem localStorage (modo privado, etc.) — a app continua a
+        // funcionar, só pede o código outra vez na próxima visita.
+      }
+    }
+
+    function mostrarGate(mensagemErro) {
+      document.getElementById("gateOverlay").style.display = "flex";
+      document.getElementById("app").style.visibility = "hidden";
+      document.getElementById("gateErro").textContent = mensagemErro || "";
+      document.getElementById("gateCodigo").focus();
+    }
+
+    function esconderGate() {
+      document.getElementById("gateOverlay").style.display = "none";
+      document.getElementById("app").style.visibility = "visible";
+    }
+
+    function iniciarGate() {
+      document.getElementById("gateBotao").addEventListener("click", tentarEntrar);
+      document.getElementById("gateCodigo").addEventListener("keydown", function (evento) {
+        if (evento.key === "Enter") tentarEntrar();
+      });
+
+      var guardado = lerCodigoGuardado();
+      if (guardado) {
+        verificarCodigo(guardado, false);
+      } else {
+        mostrarGate();
+      }
+    }
+
+    function tentarEntrar() {
+      var valor = document.getElementById("gateCodigo").value;
+      verificarCodigo(valor, true);
+    }
+
+    function verificarCodigo(valor, mostrarErroSeFalhar) {
+      google.script.run
+        .withSuccessHandler(function (resultado) {
+          if (resultado.ok) {
+            codigoAcesso = valor;
+            guardarCodigo(valor);
+            esconderGate();
+            iniciar();
+          } else if (mostrarErroSeFalhar || resultado.bloqueado) {
+            mostrarGate(resultado.mensagem || "Código incorreto.");
+          } else {
+            mostrarGate();
+          }
+        })
+        .withFailureHandler(function (erro) {
+          mostrarGate("Erro a verificar código: " + (erro && erro.message ? erro.message : erro));
+        })
+        .verificarCodigoAcesso(valor);
+    }
+
+    /**
+     * Se uma chamada ao servidor falhar por o código ter deixado de ser
+     * válido (ex.: foi trocado entretanto) ou por bloqueio, volta a
+     * mostrar o ecrã de código em vez de um erro genérico. Devolve true
+     * se tratou o erro (o chamador não precisa de fazer mais nada).
+     */
+    function tratarErroDeAcesso(erro) {
+      var mensagem = String(erro && erro.message ? erro.message : erro || "");
+      if (mensagem.indexOf("ódigo de acesso") === -1 && mensagem.indexOf("bloqueado") === -1) {
+        return false;
+      }
+      guardarCodigo("");
+      mostrarGate(mensagem);
+      return true;
+    }
+
+    function iniciar() {
+      var anoAtual = new Date().getFullYear();
+      document.getElementById("anoInicial").value = anoAtual;
+      document.getElementById("anoFinal").value = anoAtual;
+      montarPopoverEstados();
+      montarFiltroComercial();
+      ligarEventos();
+      carregarDados();
+    }
+
+    function montarFiltroComercial() {
+      var select = document.getElementById("filtroComercial");
+      COMERCIAIS.forEach(function (nome) {
+        if (!nome) return;
+        var option = document.createElement("option");
+        option.value = nome;
+        option.textContent = nome;
+        select.appendChild(option);
+      });
+    }
+
+    function carregarDados() {
+      google.script.run
+        .withSuccessHandler(aoReceberDadosIniciais)
+        .withFailureHandler(aoFalhar)
+        .obterDadosIniciais(codigoAcesso);
+    }
+
+    var DIAS_LIMITE_AVISO = 30;
+
+    function aoReceberDadosIniciais(dados) {
+      resumoCompleto = dados.resumo || [];
+      document.getElementById("metricDocumentos").textContent = dados.totalDocumentos || 0;
+      atualizarInfoUltimaAtualizacao(dados.ultimaAtualizacao);
+      verificarDadosDesatualizados(dados.ultimaAtualizacao);
+      renderizar();
+    }
+
+    function verificarDadosDesatualizados(ultimaAtualizacao) {
+      var elemento = document.getElementById("avisoDesatualizado");
+
+      if (!ultimaAtualizacao) {
+        elemento.textContent = '⚠️ Os dados da Moloni ainda não foram atualizados nesta app. Clica em "Atualizar dados do Moloni".';
+        elemento.hidden = false;
+        return;
+      }
+
+      var data = new Date(ultimaAtualizacao + "T00:00:00");
+      if (isNaN(data.getTime())) { elemento.hidden = true; return; }
+
+      var hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+      var dias = Math.round((hoje.getTime() - data.getTime()) / 86400000);
+
+      if (dias >= DIAS_LIMITE_AVISO) {
+        elemento.textContent = '⚠️ Os dados da Moloni não são atualizados há ' + dias + ' dias. Recomendamos clicar em "Atualizar dados do Moloni".';
+        elemento.hidden = false;
+      } else {
+        elemento.hidden = true;
+      }
+    }
+
+    function aoFalhar(erro) {
+      if (tratarErroDeAcesso(erro)) return;
+      console.error(erro);
+      document.getElementById("corpoTabela").innerHTML =
+        '<tr><td colspan="10" class="estado-erro">Erro a carregar dados: ' + escaparHtml(String(erro && erro.message ? erro.message : erro)) + "</td></tr>";
+    }
+
+    function atualizarInfoUltimaAtualizacao(valor) {
+      var elemento = document.getElementById("infoUltimaAtualizacao");
+      elemento.textContent = valor ? ("Última atualização: " + valor) : "Ainda sem atualização";
+    }
+
+    // ---------- Popover de estados ----------
+
+    function montarPopoverEstados() {
+      var popover = document.getElementById("popoverEstados");
+      popover.innerHTML = "";
+
+      TODOS_ESTADOS.forEach(function (estado) {
+        var label = document.createElement("label");
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = estadosSelecionados.has(estado);
+        checkbox.addEventListener("change", function () {
+          if (checkbox.checked) estadosSelecionados.add(estado);
+          else estadosSelecionados.delete(estado);
+          paginaAtual = 1;
+          renderizar();
+        });
+
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(estado));
+        popover.appendChild(label);
+      });
+    }
+
+    function ligarEventos() {
+      document.getElementById("btnToggleUpdate").addEventListener("click", function () {
+        var painel = document.getElementById("painelAtualizacao");
+        painel.hidden = !painel.hidden;
+      });
+
+      document.getElementById("btnExecutar").addEventListener("click", executarAtualizacao);
+
+      document.getElementById("btnHistoricoCompleto").addEventListener("click", function () {
+        document.getElementById("anoInicial").value = 2019;
+      });
+
+      document.getElementById("btnEstados").addEventListener("click", function (evento) {
+        evento.stopPropagation();
+        var popover = document.getElementById("popoverEstados");
+        popover.hidden = !popover.hidden;
+      });
+
+      document.addEventListener("click", function () {
+        document.getElementById("popoverEstados").hidden = true;
+      });
+
+      document.getElementById("popoverEstados").addEventListener("click", function (evento) {
+        evento.stopPropagation();
+      });
+
+      ["filtroTipoUltimo", "filtroComercial", "filtroSituacao", "ordenarPor", "ordem"].forEach(function (id) {
+        document.getElementById(id).addEventListener("change", function () {
+          paginaAtual = 1;
+          renderizar();
+        });
+      });
+
+      var timerPesquisa = null;
+      document.getElementById("filtroPesquisa").addEventListener("input", function () {
+        clearTimeout(timerPesquisa);
+        timerPesquisa = setTimeout(function () {
+          paginaAtual = 1;
+          renderizar();
+        }, 200);
+      });
+
+      document.getElementById("btnGuardar").addEventListener("click", guardarAlteracoes);
+    }
+
+    // ---------- Atualização Moloni ----------
+
+    function executarAtualizacao() {
+      var anoInicial = document.getElementById("anoInicial").value;
+      var anoFinal = document.getElementById("anoFinal").value;
+      var maxDocs = document.getElementById("maxDocs").value;
+
+      document.getElementById("btnExecutar").disabled = true;
+      var progresso = document.getElementById("progressoAtualizacao");
+      progresso.hidden = false;
+      document.getElementById("progressoTexto").textContent = "A iniciar atualização...";
+      document.getElementById("progressoBarra").style.width = "0%";
+
+      google.script.run
+        .withSuccessHandler(function (resultado) {
+          if (!resultado.ok) {
+            document.getElementById("progressoTexto").textContent = resultado.mensagem || "Não foi possível iniciar.";
+            document.getElementById("btnExecutar").disabled = false;
+            return;
+          }
+          atualizacaoEmCurso = true;
+          acompanharProgresso();
+        })
+        .withFailureHandler(function (erro) {
+          document.getElementById("btnExecutar").disabled = false;
+          if (tratarErroDeAcesso(erro)) return;
+          document.getElementById("progressoTexto").textContent = "Erro: " + (erro && erro.message ? erro.message : erro);
+        })
+        .iniciarAtualizacao(anoInicial, anoFinal, maxDocs, codigoAcesso);
+    }
+
+    function acompanharProgresso() {
+      if (pollTimer) clearTimeout(pollTimer);
+
+      google.script.run
+        .withSuccessHandler(function (estado) {
+          document.getElementById("progressoTexto").textContent = estado.mensagem || "";
+          document.getElementById("progressoBarra").style.width = (estado.percentagem || 0) + "%";
+
+          if (estado.status === "erro") {
+            document.getElementById("progressoTexto").textContent = "Erro: " + estado.erro;
+            document.getElementById("btnExecutar").disabled = false;
+            atualizacaoEmCurso = false;
+            return;
+          }
+
+          if (estado.status === "concluido") {
+            document.getElementById("btnExecutar").disabled = false;
+            atualizacaoEmCurso = false;
+            carregarDados();
+            return;
+          }
+
+          pollTimer = setTimeout(acompanharProgresso, 3000);
+        })
+        .withFailureHandler(function (erro) {
+          document.getElementById("btnExecutar").disabled = false;
+          atualizacaoEmCurso = false;
+          if (tratarErroDeAcesso(erro)) return;
+          document.getElementById("progressoTexto").textContent = "Erro: " + (erro && erro.message ? erro.message : erro);
+        })
+        .estadoAtualizacao(codigoAcesso);
+    }
+
+    // ---------- Filtros, ordenação e render ----------
+
+    function valorEditado(linha, campo) {
+      var registo = alteracoes[linha.chave_cliente];
+      if (registo && Object.prototype.hasOwnProperty.call(registo, campo)) return registo[campo];
+      return linha[campo];
+    }
+
+    function diasAteData(dataTexto) {
+      if (!dataTexto) return null;
+      var hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+      var data = new Date(dataTexto + "T00:00:00");
+      if (isNaN(data.getTime())) return null;
+      return Math.round((data.getTime() - hoje.getTime()) / 86400000);
+    }
+
+    function aplicarFiltrosEOrdenacao() {
+      var termo = document.getElementById("filtroPesquisa").value.trim().toLowerCase();
+      var tipoUltimo = document.getElementById("filtroTipoUltimo").value;
+      var comercialFiltro = document.getElementById("filtroComercial").value;
+      var situacao = document.getElementById("filtroSituacao").value;
+      var ordenarPor = document.getElementById("ordenarPor").value;
+      var ordem = document.getElementById("ordem").value;
+
+      var linhas = resumoCompleto.filter(function (l) {
+        if (estadosSelecionados.size > 0 && !estadosSelecionados.has(l.estado)) return false;
+
+        if (termo) {
+          var alvo = (String(l.cliente_nome || "") + " " + String(l.nif || "")).toLowerCase();
+          if (alvo.indexOf(termo) === -1) return false;
+        }
+
+        if (tipoUltimo && l.tipo_ultimo_documento !== tipoUltimo) return false;
+
+        if (comercialFiltro) {
+          var comercialAtual = valorEditado(l, "comercial") || "";
+          if (comercialFiltro === "__sem__") {
+            if (comercialAtual) return false;
+          } else if (comercialAtual !== comercialFiltro) {
+            return false;
+          }
+        }
+
+        if (situacao !== "todos") {
+          var proxima = valorEditado(l, "proxima_data");
+
+          if (situacao === "sem_data") {
+            if (proxima) return false;
+          } else {
+            if (!proxima) return false;
+            var dias = diasAteData(proxima);
+            if (dias === null) return false;
+            if (situacao === "vencidos" && dias >= 0) return false;
+            if (situacao === "hoje" && dias !== 0) return false;
+            if (situacao === "proximos_7" && (dias < 0 || dias > 7)) return false;
+            if (situacao === "proximos_30" && (dias < 0 || dias > 30)) return false;
+          }
+        }
+
+        return true;
+      });
+
+      linhas.sort(function (a, b) {
+        var va = ordenarPor === "proxima_data" ? valorEditado(a, "proxima_data") : a[ordenarPor];
+        var vb = ordenarPor === "proxima_data" ? valorEditado(b, "proxima_data") : b[ordenarPor];
+
+        var cmp;
+        if (va === null || va === undefined || va === "") va = ordenarPor.indexOf("valor") === 0 || ordenarPor.indexOf("dias") === 0 ? -Infinity : "";
+        if (vb === null || vb === undefined || vb === "") vb = ordenarPor.indexOf("valor") === 0 || ordenarPor.indexOf("dias") === 0 ? -Infinity : "";
+
+        if (typeof va === "number" && typeof vb === "number") {
+          cmp = va - vb;
+        } else {
+          cmp = String(va).localeCompare(String(vb), "pt");
+        }
+
+        return ordem === "asc" ? cmp : -cmp;
+      });
+
+      return linhas;
+    }
+
+    function renderizar() {
+      var linhas = aplicarFiltrosEOrdenacao();
+      atualizarMetricas(linhas);
+      renderizarTabela(linhas);
+      renderizarPaginacao(linhas.length);
+    }
+
+    function atualizarMetricas(linhasFiltradas) {
+      document.getElementById("metricAnalisados").textContent = resumoCompleto.length;
+
+      var prioritarios = resumoCompleto.filter(function (l) {
+        return l.estado === "Prioridade muito alta" || l.estado === "Prioridade alta";
+      }).length;
+      document.getElementById("metricPrioritarios").textContent = prioritarios;
+
+      var vencidos = resumoCompleto.filter(function (l) {
+        var proxima = valorEditado(l, "proxima_data");
+        if (!proxima) return false;
+        var dias = diasAteData(proxima);
+        return dias !== null && dias < 0;
+      }).length;
+
+      document.getElementById("metricVencidos").textContent = vencidos;
+      document.getElementById("cardVencidos").classList.toggle("soft-orange", vencidos > 0);
+
+      var semComercial = resumoCompleto.filter(function (l) {
+        var prioritario = l.estado === "Prioridade muito alta" || l.estado === "Prioridade alta";
+        return prioritario && !valorEditado(l, "comercial");
+      }).length;
+      document.getElementById("metricSemComercial").textContent = semComercial;
+    }
+
+    function formatarMoeda(valor) {
+      var n = Number(valor) || 0;
+      return n.toLocaleString("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    }
+
+    function escaparHtml(texto) {
+      var div = document.createElement("div");
+      div.textContent = texto === undefined || texto === null ? "" : String(texto);
+      return div.innerHTML;
+    }
+
+    function registarAlteracao(chave, linhaOriginal, campo, valor) {
+      if (!alteracoes[chave]) {
+        alteracoes[chave] = {
+          chave_cliente: chave,
+          nif: linhaOriginal.nif,
+          cliente_nome: linhaOriginal.cliente_nome,
+          baseline_atualizado_em: linhaOriginal.atualizado_em || ""
+        };
+      }
+      alteracoes[chave][campo] = valor;
+      atualizarBarraGuardar();
+    }
+
+    function mostrarAviso(mensagem, tipo) {
+      var elemento = document.getElementById("aviso");
+      elemento.textContent = mensagem;
+      elemento.className = "aviso aviso-" + tipo;
+      elemento.hidden = false;
+
+      if (elemento._timer) clearTimeout(elemento._timer);
+      elemento._timer = setTimeout(function () { elemento.hidden = true; }, tipo === "conflito" ? 8000 : 4000);
+    }
+
+    function atualizarBarraGuardar() {
+      var n = Object.keys(alteracoes).length;
+      var info = document.getElementById("alteracoesInfo");
+      var botao = document.getElementById("btnGuardar");
+
+      if (n === 0) {
+        info.textContent = "Sem alterações por guardar";
+        botao.disabled = true;
+      } else if (n === 1) {
+        info.textContent = "1 cliente alterado por guardar";
+        botao.disabled = false;
+      } else {
+        info.textContent = n + " clientes alterados por guardar";
+        botao.disabled = false;
+      }
+    }
+
+    function renderizarTabela(linhas) {
+      var corpo = document.getElementById("corpoTabela");
+      corpo.innerHTML = "";
+
+      if (linhas.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="10">Sem clientes para os filtros escolhidos.</td></tr>';
+        return;
+      }
+
+      var inicio = (paginaAtual - 1) * LINHAS_POR_PAGINA;
+      var pagina = linhas.slice(inicio, inicio + LINHAS_POR_PAGINA);
+
+      pagina.forEach(function (linha) {
+        var tr = document.createElement("tr");
+
+        var tdEstado = document.createElement("td");
+        var badge = document.createElement("span");
+        badge.className = "badge " + (BADGE_CLASSE[linha.estado] || "badge-sem");
+        badge.textContent = linha.estado;
+        tdEstado.appendChild(badge);
+        tr.appendChild(tdEstado);
+
+        tr.appendChild(criarCelulaCliente(linha));
+        tr.appendChild(criarCelulaTexto(linha.nif));
+        tr.appendChild(criarCelulaTexto(linha.data_ultimo_documento));
+        tr.appendChild(criarCelulaTexto(formatarMoeda(linha.valor_total_faturado)));
+        tr.appendChild(criarCelulaTexto(formatarMoeda(linha.valor_total_orcamentado)));
+
+        tr.appendChild(criarCelulaSelect(linha, "estado_followup", ESTADOS_FOLLOWUP));
+        tr.appendChild(criarCelulaSelect(linha, "comercial", COMERCIAIS));
+        tr.appendChild(criarCelulaTextarea(linha, "comentario"));
+        tr.appendChild(criarCelulaInput(linha, "proxima_data", "date"));
+
+        corpo.appendChild(tr);
+      });
+    }
+
+    function criarCelulaTexto(valor) {
+      var td = document.createElement("td");
+      td.textContent = valor === undefined || valor === null || valor === "" ? "—" : valor;
+      return td;
+    }
+
+    var MOLONI_CLIENTE_URL = "https://www.moloni.pt/activecard/Clientes/showUpdate/";
+
+    function criarCelulaCliente(linha) {
+      var td = document.createElement("td");
+      var nome = linha.cliente_nome || "—";
+
+      // cliente_id pode ter vários ids separados por vírgula (raro);
+      // o link usa sempre o primeiro.
+      var clienteId = String(linha.cliente_id || "").split(",")[0].trim();
+
+      if (!clienteId) {
+        td.textContent = nome;
+        return td;
+      }
+
+      var link = document.createElement("a");
+      link.href = MOLONI_CLIENTE_URL + encodeURIComponent(clienteId);
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = nome;
+      link.title = "Abrir ficha do cliente na Moloni";
+      link.style.color = "var(--azul)";
+      link.style.textDecoration = "none";
+
+      td.appendChild(link);
+      return td;
+    }
+
+    function criarCelulaTextarea(linha, campo) {
+      var td = document.createElement("td");
+      var textarea = document.createElement("textarea");
+      textarea.rows = 2;
+      textarea.value = valorEditado(linha, campo) || "";
+
+      textarea.addEventListener("focus", function () { textarea.rows = 5; });
+      textarea.addEventListener("blur", function () { textarea.rows = 2; });
+
+      textarea.addEventListener("input", function () {
+        registarAlteracao(linha.chave_cliente, linha, campo, textarea.value);
+        textarea.classList.add("editado");
+      });
+
+      td.appendChild(textarea);
+      return td;
+    }
+
+    function criarCelulaInput(linha, campo, tipo) {
+      var td = document.createElement("td");
+      var input = document.createElement("input");
+      input.type = tipo;
+      input.value = valorEditado(linha, campo) || "";
+
+      input.addEventListener("input", function () {
+        registarAlteracao(linha.chave_cliente, linha, campo, input.value);
+        input.classList.add("editado");
+      });
+
+      td.appendChild(input);
+      return td;
+    }
+
+    function criarCelulaSelect(linha, campo, opcoes) {
+      var td = document.createElement("td");
+      var select = document.createElement("select");
+
+      opcoes.forEach(function (opcao) {
+        var option = document.createElement("option");
+        option.value = opcao;
+        option.textContent = opcao === "" ? "—" : opcao;
+        select.appendChild(option);
+      });
+
+      select.value = valorEditado(linha, campo) || "";
+
+      select.addEventListener("change", function () {
+        registarAlteracao(linha.chave_cliente, linha, campo, select.value);
+        select.classList.add("editado");
+      });
+
+      td.appendChild(select);
+      return td;
+    }
+
+    function renderizarPaginacao(totalLinhas) {
+      var totalPaginas = Math.max(1, Math.ceil(totalLinhas / LINHAS_POR_PAGINA));
+      if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+
+      [document.getElementById("paginacaoTopo"), document.getElementById("paginacaoFundo")].forEach(function (container) {
+        container.innerHTML = "";
+
+        var btnAnterior = document.createElement("button");
+        btnAnterior.textContent = "←";
+        btnAnterior.disabled = paginaAtual <= 1;
+        btnAnterior.addEventListener("click", function () {
+          paginaAtual -= 1;
+          renderizar();
+        });
+
+        var info = document.createElement("span");
+        info.textContent = "Página " + paginaAtual + " de " + totalPaginas + " (" + totalLinhas + " clientes)";
+
+        var btnSeguinte = document.createElement("button");
+        btnSeguinte.textContent = "→";
+        btnSeguinte.disabled = paginaAtual >= totalPaginas;
+        btnSeguinte.addEventListener("click", function () {
+          paginaAtual += 1;
+          renderizar();
+        });
+
+        container.appendChild(btnAnterior);
+        container.appendChild(info);
+        container.appendChild(btnSeguinte);
+      });
+    }
+
+    // ---------- Guardar alterações ----------
+
+    function guardarAlteracoes() {
+      var lista = Object.keys(alteracoes).map(function (chave) { return alteracoes[chave]; });
+      if (lista.length === 0) return;
+
+      var botao = document.getElementById("btnGuardar");
+      botao.disabled = true;
+      botao.textContent = "A guardar...";
+
+      google.script.run
+        .withSuccessHandler(function (resultado) {
+          botao.textContent = "Guardar alterações";
+
+          var conflitos = resultado.conflitos || [];
+          var chavesConflito = {};
+
+          conflitos.forEach(function (c) {
+            chavesConflito[c.chave_cliente] = true;
+            if (alteracoes[c.chave_cliente]) {
+              alteracoes[c.chave_cliente].baseline_atualizado_em = c.atualizado_em_atual || "";
+            }
+          });
+
+          Object.keys(alteracoes).forEach(function (chave) {
+            if (!chavesConflito[chave]) delete alteracoes[chave];
+          });
+
+          atualizarBarraGuardar();
+          carregarDados();
+
+          if (conflitos.length > 0) {
+            var nomes = conflitos.map(function (c) { return c.cliente_nome || c.chave_cliente; }).join(", ");
+            mostrarAviso(
+              "⚠️ " + conflitos.length + (conflitos.length === 1 ? " cliente foi alterado" : " clientes foram alterados") +
+              " por outra pessoa entretanto (" + nomes + "). As tuas alterações a ess" + (conflitos.length === 1 ? "e cliente" : "es clientes") +
+              " não foram guardadas — revê e clica em \"Guardar alterações\" outra vez para aplicar.",
+              "conflito"
+            );
+          } else if (resultado.guardados > 0) {
+            mostrarAviso("✅ " + resultado.guardados + (resultado.guardados === 1 ? " cliente guardado." : " clientes guardados."), "sucesso");
+          }
+        })
+        .withFailureHandler(function (erro) {
+          botao.textContent = "Guardar alterações";
+          botao.disabled = false;
+          if (tratarErroDeAcesso(erro)) return;
+          mostrarAviso("Erro ao guardar: " + (erro && erro.message ? erro.message : erro), "erro");
+        })
+        .guardarAlteracoesFollowup(lista, codigoAcesso);
+    }
+
+    iniciarGate();
+  </script>
+</body>
+</html>
